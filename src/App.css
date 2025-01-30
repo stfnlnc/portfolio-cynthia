@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "Roboto Mono";
+    src: url("./assets/fonts/roboto-mono-vb.ttf") format("truetype");
+}
+
+@theme {
+    --color-*: initial;
+    --color-light: #E3E3E3;
+    --color-white: #FFFFFF;
+    --color-dark: #000000;
+    --animate-flash: flash 1.5s steps(1, start) infinite;
+    @keyframes flash {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    --animate-expand: expand 1s normal;
+    @keyframes expand {
+        0% { width: 0; height: 200px }
+        60% { width: 300px; height: 200px }
+        90% { width: 300px; height: 200px }
+        100% { width: 0; height: 200px }
+    }
+
+    --animate-expand-brackets: expand-brackets 2s normal;
+    @keyframes expand-brackets {
+        0% { width: 15px; height: 200px }
+        60% { width: 330px; height: 200px }
+        90% { width: 330px; height: 200px }
+        100% { width: 15px; height: 200px }
+    }
+
+    --animate-gif-expand: gif-expand 2s normal;
+    @keyframes gif-expand {
+        0% { clip-path: inset(0% 50% 0% 50%); }
+        60% { clip-path: inset(0% 0% 0% 0%); }
+        90% { clip-path: inset(0% 0% 0% 0%); }
+        100% { clip-path: inset(0% 50% 0% 50%); }
+    }
+
+    --animate-reveal: reveal 0.8s normal;
+    @keyframes reveal {
+        0% {
+            clip-path: inset(50% 50% 50% 50%);
+        }
+        100% {
+            clip-path: inset(0% 0% 0% 0%);
+        }
+    }
+}
+
+@layer base {
+    body {
+        font-family: "Roboto Mono", sans-serif;
+        @apply text-[0.825rem];
+    }
+}
+
+.preloader-expand {
+    animation-fill-mode: forwards;
+}
+.preloader-delay {
+    animation-delay: 2.8s;
+    clip-path: inset(50% 50% 50% 50%);
+}
+.gif-delay {
+    clip-path: inset(0% 50% 0% 50%);
+}
+
+.gif-delay, .brackets-delay {
+    animation-delay: 1s;
+}
+
+.clip-path-horizontal-center {
+    clip-path: inset(0% 50% 0% 50%);
+    transition: clip-path 0.6s ease-in-out;
+}
+
+#clip-path-expand:hover .clip-path-horizontal-center {
+    clip-path: inset(0% 0% 0% 0%);
+}
+
+.brackets-expand {
+    width: 200px;
+    max-width: 15px;
+    transition: max-width 0.6s ease-in-out;
+}
+
+#clip-path-expand:hover .brackets-expand {
+    max-width: 200px;
+}
