@@ -36,7 +36,7 @@ export default function Preloader () {
 
     return (
         <>
-            <section className="fixed top-0 left-0 w-full h-[100lvh] bg-dark text-light">
+            <section className="fixed top-0 left-0 w-full h-[100lvh] z-10 bg-dark text-light">
                 <div className="fixed top-1/2 -translate-y-1/2 left-0 grid grid-cols-12 w-full gap-5 px-5 py-24 select-none uppercase">
                     <div className="w-[15px] animate-expand-brackets brackets-delay absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row items-center justify-between">
                         <span>(</span>
@@ -47,7 +47,6 @@ export default function Preloader () {
                         <div className="swipe-text absolute right-full whitespace-nowrap mr-24">CYNTHIA JEGO</div>
                         <div className="swipe-text absolute left-full whitespace-nowrap ml-24">DIGITAL DESIGNER</div>
                     </div>
-                    <div className="absolute clip-path-horizontal-center top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 whitespace-nowrap">Scroll to explore</div>
                 </div>
             </section>
         </>

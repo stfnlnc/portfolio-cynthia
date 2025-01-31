@@ -7,8 +7,10 @@ import Preloader from "./components/Preloader.jsx";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import {SplitText} from "gsap/SplitText";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
 import TextPlugin from "gsap/TextPlugin";
 import {useRef} from "react";
+import Section from "./components/Section.jsx";
 
 function App() {
 
@@ -37,8 +39,10 @@ function App() {
     const initialTexts = useRef([])
 
     useGSAP(() => {
-        gsap.registerPlugin(SplitText, TextPlugin)
+        gsap.registerPlugin(SplitText, TextPlugin, ScrollTrigger)
         const swipes = document.querySelectorAll('.swipe-hover')
+
+        lenis.on('scroll', ScrollTrigger.update);
 
         swipes.forEach((swipe, key) => {
             initialTexts.current[key] = swipe.textContent
@@ -66,17 +70,41 @@ function App() {
                 }, split.chars.length * 50)
             })
         })
+
+        const sections = document.querySelectorAll(".section");
+
+        sections.forEach((section) => {
+            gsap.to(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 90%',
+                    end: 'bottom 10%',
+                    markers: false,
+                    onEnter: () => {
+                        lenis.scrollTo(section.offsetTop)
+                    },
+                    onEnterBack: () => {
+                        lenis.scrollTo(section.offsetTop)
+                    }
+                }
+            })
+        })
     });
 
 
   return (
     <>
         <Preloader />
-        <main className="relative w-full h-[100lvh] animate-reveal preloader-delay preloader-expand bg-white z-50">
+        <main className="fixed top-0 left-0 w-full animate-reveal preloader-delay h-[100lvh] preloader-expand bg-white z-50">
             <Grid />
             <Header />
             <Content />
         </main>
+        <div>
+            <Section />
+            <Section />
+            <Section />
+        </div>
     </>
   )
 }

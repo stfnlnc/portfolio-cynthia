@@ -74,21 +74,6 @@
     animation-delay: 1.4s;
 }
 
-.clip-path-horizontal-center {
-    clip-path: inset(0% 50% 0% 50%);
-    transition: clip-path 0.6s ease-in-out;
-}
-
-#clip-path-expand:hover .clip-path-horizontal-center {
-    clip-path: inset(0% 0% 0% 0%);
-}
-
-.brackets-expand {
-    width: 300px;
-    max-width: 15px;
-    transition: max-width 0.6s ease-in-out;
-}
-
-#clip-path-expand:hover .brackets-expand {
-    max-width: 300px;
+.swipe-hover {
+    width: fit-content;
 }

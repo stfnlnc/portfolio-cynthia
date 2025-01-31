@@ -1,8 +1,7 @@
-export default function Section() {
+export default function Section(props) {
     return (
         <>
-            <section className="w-full h-[100lvh]">
-
+            <section {...props} className="section relative w-full h-[100lvh] pointer-events-none">
             </section>
         </>
     )
