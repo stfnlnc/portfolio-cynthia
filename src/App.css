@@ -17,7 +17,7 @@
         100% { opacity: 1; }
     }
 
-    --animate-expand: expand 1s normal;
+    --animate-expand: expand 2s normal;
     @keyframes expand {
         0% { width: 0; height: 200px }
         60% { width: 300px; height: 200px }
@@ -63,7 +63,7 @@
     animation-fill-mode: forwards;
 }
 .preloader-delay {
-    animation-delay: 2.8s;
+    animation-delay: 3.2s;
     clip-path: inset(50% 50% 50% 50%);
 }
 .gif-delay {
@@ -71,7 +71,7 @@
 }
 
 .gif-delay, .brackets-delay {
-    animation-delay: 1s;
+    animation-delay: 1.4s;
 }
 
 .clip-path-horizontal-center {
@@ -84,11 +84,11 @@
 }
 
 .brackets-expand {
-    width: 200px;
+    width: 300px;
     max-width: 15px;
     transition: max-width 0.6s ease-in-out;
 }
 
 #clip-path-expand:hover .brackets-expand {
-    max-width: 200px;
+    max-width: 300px;
 }
