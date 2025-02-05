@@ -77,3 +77,16 @@
 .swipe-hover {
     width: fit-content;
 }
+
+#container {
+    max-height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    scroll-snap-stop: always;
+}
+
+.section {
+    scroll-snap-align: start;
+    height: 100vh;
+}
