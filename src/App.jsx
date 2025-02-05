@@ -60,26 +60,28 @@ function App() {
         const snapImages = document.querySelectorAll('.snap-image')
         const bracketsExpand = document.getElementById('brackets-expand')
         const name = document.getElementById('name')
+        const category = document.getElementById('category')
 
         initialName.current = name.textContent
 
-        const switchText = (key) => {
+        const switchText = (text, data) => {
             setTimeout(() => {
-                const split = new SplitText(name, {type: "words, chars", reduceWhiteSpace: false})
+                const split = new SplitText(text, {type: "words, chars", reduceWhiteSpace: false})
                 split.chars.forEach((chars, k) => {
                     gsap.to(chars, {
                         text: '',
-                        delay: 0.05 * k,
+                        ease: 'power4.inOut',
+                        delay: 0.03 * k,
                         onComplete: () => {
                             if(k === split.chars.length - 4) {
-                                gsap.to(name, {
-                                    text: snapImages[key].dataset.name
+                                gsap.to(text, {
+                                    text: data
                                 })
                             }
                         }
                     })
                 })
-            }, 600)
+            }, 400)
         }
 
         sections.forEach((section, key) => {
@@ -96,10 +98,12 @@ function App() {
                         markers: false,
                         scroller: '#container',
                         onEnter: () => {
-                            switchText(key)
+                            switchText(name, snapImages[key].dataset.name)
+                            switchText(category, snapImages[key].dataset.category)
                         },
                         onEnterBack: () => {
-                            switchText(key)
+                            switchText(name, snapImages[key].dataset.name)
+                            switchText(category, snapImages[key].dataset.category)
                         },
                     },
                 }
@@ -135,13 +139,13 @@ function App() {
                 <Header/>
                 <Content/>
                 <Section>
-                    <div data-name="Cynthia Jego" className="snap-image"></div>
+                    <div data-name="Cynthia Jego" data-category="Digital Designer" className="snap-image"></div>
                 </Section>
                 <Section>
-                    <img data-name="Gretta" className="snap-image pl-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[30vw] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb38134367.webp" alt=""/>
+                    <img data-name="Gretta" data-category="Site web" className="snap-image absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[30vw] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb38134367.webp" alt=""/>
                 </Section>
                 <Section>
-                    <img data-name="Loretta" className="snap-image pl-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[30vw] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb3bcc9f77.webp" alt=""/>
+                    <img data-name="Loretta" data-category="Branding" className="snap-image absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[30vw] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb3bcc9f77.webp" alt=""/>
                 </Section>
             </main>
         </>

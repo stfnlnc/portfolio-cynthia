@@ -10,7 +10,9 @@ export default function Content() {
                     <div className="swipe-hover absolute right-full whitespace-nowrap mr-24">
                         <div id="name">CYNTHIA JEGO</div>
                     </div>
-                    <div id="category" className="swipe-hover absolute left-full whitespace-nowrap ml-24">DIGITAL DESIGNER</div>
+                    <div className="swipe-hover absolute left-full whitespace-nowrap ml-24">
+                        <div id="category">DIGITAL DESIGNER</div>
+                    </div>
                 </div>
             </div>
         </>
