@@ -22,6 +22,8 @@ function App() {
     }
 
     const initialTexts = useRef([])
+    const initialName = useRef(null)
+
     useGSAP(() => {
         gsap.registerPlugin(SplitText, TextPlugin, ScrollTrigger)
 
@@ -57,6 +59,28 @@ function App() {
         const sections = document.querySelectorAll('.section')
         const snapImages = document.querySelectorAll('.snap-image')
         const bracketsExpand = document.getElementById('brackets-expand')
+        const name = document.getElementById('name')
+
+        initialName.current = name.textContent
+
+        const switchText = (key) => {
+            setTimeout(() => {
+                const split = new SplitText(name, {type: "words, chars", reduceWhiteSpace: false})
+                split.chars.forEach((chars, k) => {
+                    gsap.to(chars, {
+                        text: '',
+                        delay: 0.05 * k,
+                        onComplete: () => {
+                            if(k === split.chars.length - 4) {
+                                gsap.to(name, {
+                                    text: snapImages[key].dataset.name
+                                })
+                            }
+                        }
+                    })
+                })
+            }, 600)
+        }
 
         sections.forEach((section, key) => {
             gsap.fromTo(snapImages[key], {
@@ -71,14 +95,20 @@ function App() {
                         toggleActions: "play reverse play reverse",
                         markers: false,
                         scroller: '#container',
+                        onEnter: () => {
+                            switchText(key)
+                        },
+                        onEnterBack: () => {
+                            switchText(key)
+                        },
                     },
                 }
             )
             gsap.fromTo(bracketsExpand, {
                     width: 0
                 }, {
-                    width: 1000,
-                    duration: 1.2,
+                    width: snapImages[1].offsetWidth + 25,
+                    duration: 1,
                     ease: 'power4.inOut',
                     scrollTrigger: {
                         trigger: sections[1],
@@ -86,6 +116,9 @@ function App() {
                         toggleActions: "play none none reverse",
                         markers: false,
                         scroller: '#container',
+                        onLeaveBack: () => {
+
+                        }
                     },
                 }
             )
