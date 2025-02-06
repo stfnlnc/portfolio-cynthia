@@ -13,16 +13,13 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 import TextPlugin from "gsap/TextPlugin";
 // React
 import {useRef} from "react";
+// Utils
+import swipeText from "./js/swipe-text.js";
+import revealProject from "./js/reveal-project.js";
 
 function App() {
 
-    function generateRandomLetter() {
-        const alphabet = "abcdefghijklmnopqrstuvwxyz#@=+&!?$"
-        return alphabet[Math.floor(Math.random() * alphabet.length)]
-    }
-
     const initialTexts = useRef([])
-    const initialName = useRef(null)
 
     useGSAP(() => {
         gsap.registerPlugin(SplitText, TextPlugin, ScrollTrigger)
@@ -30,30 +27,7 @@ function App() {
         const swipes = document.querySelectorAll('.swipe-hover')
 
         swipes.forEach((swipe, key) => {
-            initialTexts.current[key] = swipe.textContent
-            const split = new SplitText(swipe, {type: "words, chars"});
-            swipe.addEventListener('mouseenter', () => {
-                let lastWordLength = 0
-                split.words.forEach(word => {
-                    let wordLength = word.innerText.length + lastWordLength
-                    for (let i = 0; i < wordLength; i++) {
-                        split.chars.forEach((chars, k) => {
-                            gsap.to(chars, {
-                                text: generateRandomLetter(),
-                                delay: 0.08 * k * Math.random(),
-                            })
-                        })
-                    }
-                })
-                setTimeout(() => {
-                    split.chars.forEach((chars, k) => {
-                        gsap.to(chars, {
-                            text: initialTexts.current[key].replace(/\s/g, '')[k],
-                            delay: 0.03 * k
-                        })
-                    })
-                }, split.chars.length * 50)
-            })
+            swipeText(initialTexts.current, swipe, key)
         })
 
         const sections = document.querySelectorAll('.section')
@@ -62,74 +36,11 @@ function App() {
         const name = document.getElementById('name')
         const category = document.getElementById('category')
 
-        initialName.current = name.textContent
-
-        const switchText = (text, data) => {
-            setTimeout(() => {
-                const split = new SplitText(text, {type: "words, chars", reduceWhiteSpace: false})
-                split.chars.forEach((chars, k) => {
-                    gsap.to(chars, {
-                        text: '',
-                        ease: 'power4.inOut',
-                        delay: 0.03 * k,
-                        onComplete: () => {
-                            if(k === split.chars.length - 4) {
-                                gsap.to(text, {
-                                    text: data
-                                })
-                            }
-                        }
-                    })
-                })
-            }, 400)
-        }
-
         sections.forEach((section, key) => {
-            gsap.fromTo(snapImages[key], {
-                    clipPath: 'polygon(50% 0%, 50% 0%, 50% 100%, 50% 100%)'
-                }, {
-                    clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-                    duration: 1.2,
-                    ease: 'power4.inOut',
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top center",
-                        toggleActions: "play reverse play reverse",
-                        markers: false,
-                        scroller: '#container',
-                        onEnter: () => {
-                            switchText(name, snapImages[key].dataset.name)
-                            switchText(category, snapImages[key].dataset.category)
-                        },
-                        onEnterBack: () => {
-                            switchText(name, snapImages[key].dataset.name)
-                            switchText(category, snapImages[key].dataset.category)
-                        },
-                    },
-                }
-            )
-            gsap.fromTo(bracketsExpand, {
-                    width: 0
-                }, {
-                    width: snapImages[1].offsetWidth + 25,
-                    duration: 1,
-                    ease: 'power4.inOut',
-                    scrollTrigger: {
-                        trigger: sections[1],
-                        start: "top center",
-                        toggleActions: "play none none reverse",
-                        markers: false,
-                        scroller: '#container',
-                        onLeaveBack: () => {
-
-                        }
-                    },
-                }
-            )
+            revealProject(snapImages[key], snapImages[1], category, name, section, sections, bracketsExpand)
         });
 
     }, []);
-
 
     return (
         <>
@@ -142,10 +53,10 @@ function App() {
                     <div data-name="Cynthia Jego" data-category="Digital Designer" className="snap-image"></div>
                 </Section>
                 <Section>
-                    <img data-name="Gretta" data-category="Site web" className="snap-image absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[30vw] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb38134367.webp" alt=""/>
+                    <img data-name="Gretta" data-category="Site web" className="snap-image absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60lvh] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb38134367.webp" alt=""/>
                 </Section>
                 <Section>
-                    <img data-name="Loretta" data-category="Branding" className="snap-image absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[30vw] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb3bcc9f77.webp" alt=""/>
+                    <img data-name="Loretta" data-category="Branding" className="snap-image absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60lvh] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb3bcc9f77.webp" alt=""/>
                 </Section>
             </main>
         </>
