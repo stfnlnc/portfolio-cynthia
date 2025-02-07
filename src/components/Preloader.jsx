@@ -12,7 +12,7 @@ export default function Preloader () {
             return alphabet[Math.floor(Math.random() * alphabet.length)]
         }
         const swipes = document.querySelectorAll('.swipe-text')
-        const newText = ['CynthiaJego', 'DigitalDesigner']
+        const newText = ['CynthiaJego', 'WebDesigner']
         swipes.forEach((swipe, key) => {
             const split = new SplitText(swipe, {type: "words, chars"});
             let lastWordLength = 0
@@ -45,7 +45,7 @@ export default function Preloader () {
                              className="animate-gif-expand preloader-expand gif-delay w-[300px] h-[200px]  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
                         <span>)</span>
                         <div className="swipe-text absolute right-full whitespace-nowrap mr-24">CYNTHIA JEGO</div>
-                        <div className="swipe-text absolute left-full whitespace-nowrap ml-24">DIGITAL DESIGNER</div>
+                        <div className="swipe-text absolute left-full whitespace-nowrap ml-24">Web DESIGNER</div>
                     </div>
                 </div>
             </section>

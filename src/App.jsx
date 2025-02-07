@@ -35,10 +35,63 @@ function App() {
         const bracketsExpand = document.getElementById('brackets-expand')
         const name = document.getElementById('name')
         const category = document.getElementById('category')
+        const clipPathExpand = document.getElementById('clip-path-expand')
+        const scrollPathExpand = document.getElementById('scroll-path-expand')
 
         sections.forEach((section, key) => {
             revealProject(snapImages[key], snapImages[1], category, name, section, sections, bracketsExpand)
+            gsap.to(sections[0], {
+                scrollTrigger: {
+                    trigger: sections[0],
+                    markers: false,
+                    scroller: '#container',
+                    onLeave: () => {
+                        clipPathExpand.classList.add('pointer-events-none')
+                    },
+                    onEnterBack: () => {
+                        clipPathExpand.classList.remove('pointer-events-none')
+                    }
+                }
+            })
+            gsap.to(sections[sections.length - 1], {
+                scrollTrigger: {
+                    trigger: sections[sections.length - 1],
+                    markers: false,
+                    scroller: '#container',
+                    onLeaveBack: () => {
+                        gsap.to(bracketsExpand, {
+                            width: snapImages[1].offsetWidth + 25,
+                            duration: 1,
+                            ease: 'power4.out',
+                        })
+                        clipPathExpand.classList.add('pointer-events-none')
+                    },
+                    onEnter: () => {
+                        gsap.to(bracketsExpand, {
+                            width: 0,
+                            duration: 1,
+                            ease: 'power4.inOut',
+                        })
+                        clipPathExpand.classList.remove('pointer-events-none')
+                    }
+                }
+            })
         });
+
+        clipPathExpand.addEventListener('mouseover', () => {
+            gsap.fromTo(bracketsExpand, {
+                width: 0
+            }, {
+                width: scrollPathExpand.offsetWidth
+            })
+        })
+        clipPathExpand.addEventListener('mouseout', () => {
+            gsap.fromTo(bracketsExpand, {
+                width: scrollPathExpand.offsetWidth
+            }, {
+                width: 0
+            })
+        })
 
     }, []);
 
@@ -49,15 +102,10 @@ function App() {
                 <Grid/>
                 <Header/>
                 <Content/>
-                <Section>
-                    <div data-name="Cynthia Jego" data-category="Digital Designer" className="snap-image"></div>
-                </Section>
-                <Section>
-                    <img data-name="Gretta" data-category="Site web" className="snap-image absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60lvh] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb38134367.webp" alt=""/>
-                </Section>
-                <Section>
-                    <img data-name="Loretta" data-category="Branding" className="snap-image absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60lvh] object-center object-cover" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb3bcc9f77.webp" alt=""/>
-                </Section>
+                <Section href="" name="Cynthia Jego" category="Web Designer" />
+                <Section href="" name="Gretta" category="Architecture" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb38134367.webp" />
+                <Section href="" name="Loretta" category="Restaurant" src="https://studiokhi.com/uploads/works/gretta/1920/gretta-678fb3bcc9f77.webp" />
+                <Section name="Thanks for" category="Watching" />
             </main>
         </>
     )
