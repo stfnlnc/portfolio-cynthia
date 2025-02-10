@@ -41,7 +41,7 @@ export default function Preloader () {
                     <div className="w-[15px] animate-expand-brackets brackets-delay absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row items-center justify-between">
                         <span>(</span>
                         <div className="animate-expand gif-delay preloader-expand h-[200px] bg-light absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
-                        <div style={{background: 'url(https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif)', backgroundSize: 'cover'}}
+                        <div style={{background: 'url(/videos/preloader.gif)', backgroundSize: 'cover', backgroundPosition: 'center'}}
                              className="animate-gif-expand preloader-expand gif-delay w-[300px] h-[200px]  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
                         <span>)</span>
                         <div className="swipe-text absolute right-full whitespace-nowrap mr-24">CYNTHIA JEGO</div>

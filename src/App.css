@@ -93,3 +93,7 @@
     height: 100vh;
 }
 
+#scroll-path-expand {
+    clip-path: inset(0% 50% 0% 50%);
+}
+
