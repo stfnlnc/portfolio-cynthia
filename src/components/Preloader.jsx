@@ -1,16 +1,18 @@
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import {useGSAP} from '@gsap/react';
 import {SplitText} from "gsap/SplitText";
 import TextPlugin from "gsap/TextPlugin";
 
-export default function Preloader () {
+export default function Preloader() {
 
     useGSAP(() => {
         gsap.registerPlugin(SplitText, TextPlugin)
+
         function generateRandomLetter() {
             const alphabet = "abcdefghijklmnopqrstuvwxyz#@=+&!?$"
             return alphabet[Math.floor(Math.random() * alphabet.length)]
         }
+
         const swipes = document.querySelectorAll('.swipe-text')
         const newText = ['CynthiaJego', 'WebDesigner']
         swipes.forEach((swipe, key) => {
@@ -18,7 +20,7 @@ export default function Preloader () {
             let lastWordLength = 0
             split.words.forEach(word => {
                 let wordLength = word.innerText.length + lastWordLength
-                for(let i = 0; i < wordLength; i++) {
+                for (let i = 0; i < wordLength; i++) {
                     split.chars[i].innerText = generateRandomLetter()
                 }
                 lastWordLength = wordLength
@@ -41,11 +43,11 @@ export default function Preloader () {
                     <div className="w-[15px] animate-expand-brackets brackets-delay absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row items-center justify-between">
                         <span>(</span>
                         <div className="animate-expand gif-delay preloader-expand h-[200px] bg-light absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
-                        <div style={{background: 'url(/videos/preloader.gif)', backgroundSize: 'cover', backgroundPosition: 'center'}}
-                             className="animate-gif-expand preloader-expand gif-delay w-[300px] h-[200px]  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
+                        <div style={{background: 'url(/videos/cynthiajego.gif)', backgroundSize: 'cover', backgroundPosition: 'center'}}
+                             className="animate-gif-expand preloader-expand gif-delay w-[300px] h-[187px]  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
                         <span>)</span>
-                        <div className="swipe-text absolute right-full whitespace-nowrap mr-24">CYNTHIA JEGO</div>
-                        <div className="swipe-text absolute left-full whitespace-nowrap ml-24">Web DESIGNER</div>
+                        <div className="swipe-text absolute bottom-full right-1/2 translate-x-1/2 -translate-y-32 md:bottom-1/2 md:translate-x-0 md:translate-y-1/2 md:right-full whitespace-nowrap md:mr-8 lg:mr-16 xl:mr-24">Cynthia Jego</div>
+                        <div className="swipe-text absolute top-full left-1/2 -translate-x-1/2 translate-y-34 md:top-1/2 md:translate-x-0 md:-translate-y-1/2 md:left-full whitespace-nowrap md:ml-8 lg:ml-16 xl:ml-24">Web Designer</div>
                     </div>
                 </div>
             </section>

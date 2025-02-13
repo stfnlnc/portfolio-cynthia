@@ -17,6 +17,7 @@ import {useRef} from "react";
 import swipeText from "./js/swipe-text.js";
 import revealProject from "./js/reveal-project.js";
 
+
 function App() {
 
     const initialTexts = useRef([])
@@ -38,29 +39,38 @@ function App() {
         const clipPathExpand = document.getElementById('clip-path-expand')
         const scrollPathExpand = document.getElementById('scroll-path-expand')
         const videos = document.querySelectorAll('.video')
+        bracketsExpand.style.width = window.innerWidth > 768 ? 0 : scrollPathExpand.offsetWidth + 'px'
 
         sections.forEach((section, key) => {
             revealProject(snapImages[key], snapImages[1], category, name, section, sections, bracketsExpand)
-            if(key > 0 && key < sections.length - 1) {
+            if (key > 0 && key < sections.length - 1) {
                 gsap.to(videos[key - 1], {
                     scrollTrigger: {
                         trigger: sections[key],
                         scroller: '#container',
                         onEnter: () => {
-                            videos[key - 1].play()
+                            setTimeout(() => {
+                                videos[key - 1].play()
+                            }, 300)
                         },
                         onEnterBack: () => {
-                            videos[key - 1].play()
+                            setTimeout(() => {
+                                videos[key - 1].play()
+                            }, 300)
                         },
                         onLeave: () => {
-                            videos[key - 1].pause()
-                            videos[key - 1].currentTime = 0
-                            videos[key - 1].load()
+                            setTimeout(() => {
+                                videos[key - 1].pause()
+                                videos[key - 1].currentTime = 0
+                                videos[key - 1].load()
+                            }, 1000)
                         },
                         onLeaveBack: () => {
-                            videos[key - 1].pause()
-                            videos[key - 1].currentTime = 0
-                            videos[key - 1].load()
+                            setTimeout(() => {
+                                videos[key - 1].pause()
+                                videos[key - 1].currentTime = 0
+                                videos[key - 1].load()
+                            }, 1000)
                         },
                     }
                 })
@@ -72,9 +82,30 @@ function App() {
                     scroller: '#container',
                     onLeave: () => {
                         clipPathExpand.classList.add('pointer-events-none')
+                        gsap.to(bracketsExpand, {
+                            width: snapImages[1].offsetWidth + 25,
+                            duration: 1,
+                            ease: 'power4.out',
+                        })
+                        gsap.fromTo(scrollPathExpand, {
+                            clipPath: window.innerWidth > 768 ? '' : 'inset(0% 0% 0% 0%)'
+                        }, {
+                            clipPath: window.innerWidth > 768 ? '' : 'inset(0% 50% 0% 50%)'
+                        })
                     },
                     onEnterBack: () => {
                         clipPathExpand.classList.remove('pointer-events-none')
+                        gsap.to(bracketsExpand, {
+                            width: window.innerWidth > 768 ? 0 : scrollPathExpand.offsetWidth,
+                            duration: 1,
+                            ease: 'power4.inOut',
+                            delay: 0.8
+                        })
+                        gsap.fromTo(scrollPathExpand, {
+                            clipPath: window.innerWidth > 768 ? '' : 'inset(0% 50% 0% 50%)'
+                        }, {
+                            clipPath: window.innerWidth > 768 ? '' : 'inset(0% 0% 0% 0%)'
+                        })
                     }
                 }
             })
@@ -89,14 +120,29 @@ function App() {
                             duration: 1,
                             ease: 'power4.out',
                         })
+                        gsap.fromTo(scrollPathExpand, {
+                            clipPath: window.innerWidth > 768 ? '' : 'inset(0% 0% 0% 0%)'
+                        }, {
+                            clipPath: window.innerWidth > 768 ? '' : 'inset(0% 50% 0% 50%)'
+                        })
                         clipPathExpand.classList.add('pointer-events-none')
-                        scrollPathExpand.innerText = 'Scroll to Explore'
+                        setTimeout(() => {
+                            scrollPathExpand.innerText = 'Scroll to Explore'
+
+                        }, 1000)
                     },
                     onEnter: () => {
                         gsap.to(bracketsExpand, {
-                            width: 0,
+                            width: window.innerWidth > 768 ? 0 : scrollPathExpand.offsetWidth,
                             duration: 1,
                             ease: 'power4.inOut',
+                            delay: 0.8
+                        })
+                        gsap.fromTo(scrollPathExpand, {
+                            clipPath: window.innerWidth > 768 ? '' : 'inset(0% 50% 0% 50%)'
+                        }, {
+                            clipPath: window.innerWidth > 768 ? '' : 'inset(0% 0% 0% 0%)',
+                            delay: 1.6
                         })
                         clipPathExpand.classList.remove('pointer-events-none')
                         scrollPathExpand.innerText = 'hello@cynthiajego.com'
@@ -107,12 +153,12 @@ function App() {
 
         clipPathExpand.addEventListener('mouseover', () => {
             gsap.fromTo(bracketsExpand, {
-                width: 0
+                width: window.innerWidth > 768 ? 0 : scrollPathExpand.offsetWidth
             }, {
                 width: scrollPathExpand.offsetWidth
             })
             gsap.fromTo(scrollPathExpand, {
-                clipPath: 'inset(0% 50% 0% 50%)'
+                clipPath: window.innerWidth > 768 ? 'inset(0% 50% 0% 50%)' : 'inset(0% 0% 0% 0%)'
             }, {
                 clipPath: 'inset(0% 0% 0% 0%)'
             })
@@ -121,12 +167,12 @@ function App() {
             gsap.fromTo(bracketsExpand, {
                 width: scrollPathExpand.offsetWidth
             }, {
-                width: 0
+                width: window.innerWidth > 768 ? 0 : scrollPathExpand.offsetWidth
             })
             gsap.fromTo(scrollPathExpand, {
                 clipPath: 'inset(0% 0% 0% 0%)'
             }, {
-                clipPath: 'inset(0% 50% 0% 50%)'
+                clipPath: window.innerWidth > 768 ? 'inset(0% 50% 0% 50%)' : 'inset(0% 0% 0% 0%)'
             })
         })
 
@@ -140,12 +186,13 @@ function App() {
                 <Grid/>
                 <Header/>
                 <Content/>
-                <Section href="" name="Cynthia Jego" category="Web Designer" />
-                <Section href="" name="Gretta" category="Architecture" src="/videos/gretta.mp4" />
-                <Section href="" name="Loretta" category="Restaurant" src="/videos/loretta.mp4" />
-                <Section href="" name="Vaste" category="Magazine" src="/videos/vaste.mp4" />
-                <Section href="" name="SurImpression" category="Culture" src="/videos/surimpression.mp4" />
-                <Section name="Thanks for" category="Watching" />
+                <Section href="https://studiokhi.com" name="Cynthia Jego" category="Web Designer"/>
+                <Section href="https://studiokhi.com" name="SurImpression" category="Art & Culture" src="/videos/surimpression.mp4"/>
+                <Section href="https://studiokhi.com" name="Vaste" category="Magazine & Blog" src="/videos/vaste.mp4"/>
+                <Section href="https://studiokhi.com" name="Loretta" category="Food & Drink" src="/videos/loretta.mp4"/>
+                <Section name="Oto Nove" category="Art & Culture" src="/videos/otonove.mp4"/>
+                <Section href="https://studiokhi.com" name="Gretta" category="Architecture" src="/videos/gretta.mp4"/>
+                <Section name="Thanks for" category="Watching"/>
             </main>
         </>
     )

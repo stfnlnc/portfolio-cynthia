@@ -12,28 +12,54 @@
     --color-dark: #000000;
     --animate-flash: flash 1.5s steps(1, start) infinite;
     @keyframes flash {
-        0% { opacity: 1; }
-        50% { opacity: 0; }
-        100% { opacity: 1; }
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 
     --animate-expand-brackets: expand-brackets 2s normal;
     @keyframes expand-brackets {
-        0% { width: 15px; height: 200px }
-        60% { width: 330px; height: 200px }
-        90% { width: 330px; height: 200px }
-        100% { width: 15px; height: 200px }
+        0% {
+            width: 15px;
+            height: 200px
+        }
+        60% {
+            width: 330px;
+            height: 200px
+        }
+        90% {
+            width: 330px;
+            height: 200px
+        }
+        100% {
+            width: 15px;
+            height: 200px
+        }
     }
 
     --animate-gif-expand: gif-expand 2s normal;
     @keyframes gif-expand {
-        0% { clip-path: inset(0% 50% 0% 50%); }
-        60% { clip-path: inset(0% 0% 0% 0%); }
-        90% { clip-path: inset(0% 0% 0% 0%); }
-        100% { clip-path: inset(0% 50% 0% 50%); }
+        0% {
+            clip-path: inset(0% 50% 0% 50%);
+        }
+        60% {
+            clip-path: inset(0% 0% 0% 0%);
+        }
+        90% {
+            clip-path: inset(0% 0% 0% 0%);
+        }
+        100% {
+            clip-path: inset(0% 50% 0% 50%);
+        }
     }
 
-    --animate-reveal: reveal 0.8s normal cubic-bezier(.8,.11,.09,.99);
+    --animate-reveal: reveal 0.8s normal cubic-bezier(.8, .11, .09, .99);
     @keyframes reveal {
         0% {
             clip-path: inset(50% 50% 50% 50%);
@@ -58,10 +84,12 @@
 .preloader-expand {
     animation-fill-mode: forwards;
 }
+
 .preloader-delay {
     animation-delay: 3.2s;
     clip-path: inset(50% 50% 50% 50%);
 }
+
 .gif-delay {
     clip-path: inset(0% 50% 0% 50%);
 }
@@ -80,8 +108,8 @@
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     scroll-snap-stop: always;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 #container::-webkit-scrollbar {
@@ -90,10 +118,22 @@
 
 .section {
     scroll-snap-align: start;
+    scroll-snap-stop: always;
     height: 100vh;
+}
+
+.snap-image {
+    clip-path: inset(0% 50% 0% 50%);
+    will-change: clip-path;
 }
 
 #scroll-path-expand {
     clip-path: inset(0% 50% 0% 50%);
+}
+
+@media screen and (max-width: 768px) {
+    #scroll-path-expand {
+        clip-path: inset(0% 0% 0% 0%);
+    }
 }
 
