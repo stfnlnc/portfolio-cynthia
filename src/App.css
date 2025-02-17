@@ -22,52 +22,6 @@
             opacity: 1;
         }
     }
-
-    --animate-expand-brackets: expand-brackets 2s normal;
-    @keyframes expand-brackets {
-        0% {
-            width: 15px;
-            height: 200px
-        }
-        60% {
-            width: 330px;
-            height: 200px
-        }
-        90% {
-            width: 330px;
-            height: 200px
-        }
-        100% {
-            width: 15px;
-            height: 200px
-        }
-    }
-
-    --animate-gif-expand: gif-expand 2s normal;
-    @keyframes gif-expand {
-        0% {
-            clip-path: inset(0% 50% 0% 50%);
-        }
-        60% {
-            clip-path: inset(0% 0% 0% 0%);
-        }
-        90% {
-            clip-path: inset(0% 0% 0% 0%);
-        }
-        100% {
-            clip-path: inset(0% 50% 0% 50%);
-        }
-    }
-
-    --animate-reveal: reveal 0.8s normal cubic-bezier(.8, .11, .09, .99);
-    @keyframes reveal {
-        0% {
-            clip-path: inset(50% 50% 50% 50%);
-        }
-        100% {
-            clip-path: inset(0% 0% 0% 0%);
-        }
-    }
 }
 
 @layer base {
@@ -77,25 +31,12 @@
     }
 }
 
+.gif-expand {
+    clip-path: inset(0% 50% 0% 50%);
+}
+
 #scroll-path-expand {
     clip-path: inset(0% 50% 0% 50%);
-}
-
-.preloader-expand {
-    animation-fill-mode: forwards;
-}
-
-.preloader-delay {
-    animation-delay: 3.2s;
-    clip-path: inset(50% 50% 50% 50%);
-}
-
-.gif-delay {
-    clip-path: inset(0% 50% 0% 50%);
-}
-
-.gif-delay, .brackets-delay {
-    animation-delay: 1.4s;
 }
 
 .swipe-hover {
@@ -103,6 +44,7 @@
 }
 
 #container {
+    clip-path: inset(50% 50% 50% 50%);
     max-height: 100vh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;

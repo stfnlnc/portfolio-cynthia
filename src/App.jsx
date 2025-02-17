@@ -186,12 +186,12 @@ function App() {
                 <Grid/>
                 <Header/>
                 <Content/>
-                <Section href="https://studiokhi.com" name="Cynthia Jego" category="Web Designer"/>
-                <Section href="https://studiokhi.com" name="SurImpression" category="Art & Culture" src="/videos/surimpression.mp4"/>
-                <Section href="https://studiokhi.com" name="Vaste" category="Magazine & Blog" src="/videos/vaste.mp4"/>
-                <Section href="https://studiokhi.com" name="Loretta" category="Food & Drink" src="/videos/loretta.mp4"/>
+                <Section name="Cynthia Jego" category="Web Designer"/>
+                <Section href="https://surimpression.studiokhi.com" name="SurImpression" category="Art & Culture" src="/videos/surimpression.mp4"/>
+                <Section href="https://vaste.studiokhi.com" name="Vaste" category="Magazine & Blog" src="/videos/vaste.mp4"/>
+                <Section href="https://loretta.studiokhi.com" name="Loretta" category="Food & Drink" src="/videos/loretta.mp4"/>
                 <Section name="Oto Nove" category="Art & Culture" src="/videos/otonove.mp4"/>
-                <Section href="https://studiokhi.com" name="Gretta" category="Architecture" src="/videos/gretta.mp4"/>
+                <Section href="https://gretta.studiokhi.com" name="Gretta" category="Architecture" src="/videos/gretta.mp4"/>
                 <Section name="Thanks for" category="Watching"/>
             </main>
         </>
